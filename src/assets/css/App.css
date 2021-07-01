@@ -1,0 +1,60 @@
+/* colour definitions */
+/* yellow: #fcba03 */
+/* green: #32a852 */
+/* red: #eb4034 */
+/* blue: #4287f5 */
+/* another blue: #61dafb */
+
+.App {
+  text-align: center;
+}
+
+.App {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-header {
+  margin-top: 5rem;
+}
+
+.calendar {
+  padding: 0 2rem;
+  padding-bottom: 1rem;
+}
+
+.calendar header .row, .calendar main .row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-gap: 10px;
+}
+
+.calendar .row {
+  margin: 0.5rem 0;
+}
+
+.calendar .cell {
+  padding: 1rem;
+  user-select: none;
+}
+
+.calendar main .cell {
+  background: #edeeed;
+  color: #333;
+  cursor: pointer;
+}
+
+.calendar main .cell {
+  cursor: pointer;
+}
+
+.calendar main .cell-activated {
+  background: #4287f5;
+  cursor: pointer;
+}
