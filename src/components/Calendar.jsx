@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react';
+import {Context} from '../Store/Store';
 
 function Calendar () {
 
@@ -28,11 +29,15 @@ function Calendar () {
   
   }
 
-  const [data, setData] = useState(arr);
+  const [state, dispatch] = useContext(Context);
+
+  useEffect(() => {
+    dispatch({type: 'SET_PROGRESS', payload: arr});
+  }, [])
 
   function toggleCell (week, day) {
-    data[week][day].active = !data[week][day].active;
-    setData(data => [...data]);
+    state.progress[week][day].active = !state.progress[week][day].active;
+    dispatch({ type: 'SET_PROGRESS', payload: state.progress });
   }
 
   return (
@@ -50,7 +55,7 @@ function Calendar () {
       </header>
       <main>
 
-        {data.map((row, parentKey) => (
+        {state.progress.map((row, parentKey) => (
 
           <div className="row" key={parentKey}>
 
