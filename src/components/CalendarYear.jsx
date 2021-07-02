@@ -8,10 +8,7 @@ import objectSupport from 'dayjs/plugin/objectSupport';
 dayjs.extend(dayOfYear)
 dayjs.extend(objectSupport)
 
-function CalendarYear () {
-
-  const [state, dispatch] = useContext(Context)
-
+const buildCalendarTertile = () => {
   //
   let date = dayjs()
   let tertile = Math.floor((date.month() + 4) / 4) -1
@@ -33,42 +30,43 @@ function CalendarYear () {
     obj[i] = { date: dayjs().dayOfYear(i).format('YYYY-MM-DD'), dayOfYear: i, active: false }
   }
 
-  //
-  const [calendarTertile, setCalendarTertile] = useState(obj)
+  return obj
+}
 
-  //
-  let calendarTertileArray = Object.values(calendarTertile)
+const updateProgress = (data, calendarTertileArray) => {
 
-  //
-  useEffect(() => {
+  // flatten state.progress into just days instead of weeks/days
+  let progress = [].concat.apply([], data)
 
-    // flatten state.progress into just days instead of weeks/days
-    let progress = [].concat.apply([], state.progress)
+  // update current month's progress
+  let newArr = calendarTertileArray.map((day) => {
 
-    if (progress.length > 0) {
+    //
+    let today = dayjs().dayOfYear(dayjs(day.dayOfYear))
 
-      // update current month's progress
-      let newArr = calendarTertileArray.map((day) => {
+    //
+    if (today.month() !== dayjs().month()) return day
 
-        //
-        let today = dayjs().dayOfYear(dayjs(day.dayOfYear))
-
-        //
-        if (today.month() !== dayjs().month()) return day
-
-        //
-        if (today.month() == dayjs().month()) {
-          return progress[today.date() - 1]
-        }
-
-      })
-
-      //
-      setCalendarTertile(() => [...newArr])
-
+    //
+    if (today.month() == dayjs().month()) {
+      return progress[today.date() - 1]
     }
 
-  }, [state.progress]);
+  })
+
+  //
+  return newArr
+
+}
+
+function CalendarYear () {
+
+  const [state, dispatch] = useContext(Context)
+  const [calendarTertile, setCalendarTertile] = useState(buildCalendarTertile())
+
+  let calendarTertileArray = Object.values(calendarTertile)
+
+  useEffect(() => state.progress.length > 0 && setCalendarTertile(() => [...updateProgress(state.progress, calendarTertileArray)]), [state.progress]);
 
   return (
     <div className="calendarYear">

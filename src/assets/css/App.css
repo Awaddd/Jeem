@@ -21,6 +21,14 @@
   color: white;
 }
 
+.App-header h1 {
+  font-size: 5rem;
+}
+
+.App-month-label {
+  margin-top: 3rem;
+}
+
 .calendar {
   padding: 0 2rem;
   padding-bottom: 1rem;
