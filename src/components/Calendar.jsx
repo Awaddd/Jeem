@@ -1,33 +1,20 @@
 import React, { useState, useContext, useEffect } from 'react';
-import {Context} from '../Store/Store';
+import { Context } from '../Store/Store';
+import { initialiseCalendarMonth } from '../Helpers/MainHelper';
 
 function Calendar () {
 
   //define date
   let date = new Date();
   let year = date.getFullYear();
-  let month = date.getMonth();
+  let month = date.getMonth() + 1;
   let totalDays = new Date(year, month, 0).getDate();
 
   //calculate the number of weeks/rows based on the total days in the current month
   let numWeeks = Math.floor(Math.sqrt(totalDays));
 
   //
-  let arr = [];
-  let currentDay = 1;
-
-  for (let week = 0; week < numWeeks; week++) {
-  
-    arr[week] = [];
-
-    for (let day = 0; day < 7; day++) {
-      if (currentDay <= totalDays) {
-        arr[week][day] = {day: currentDay, active: false};
-        currentDay++;
-      }
-    }
-  
-  }
+  let arr = initialiseCalendarMonth(numWeeks, totalDays);
 
   const [state, dispatch] = useContext(Context);
 

@@ -20,10 +20,6 @@
   color: white;
 }
 
-.App-header {
-  margin-top: 5rem;
-}
-
 .calendar {
   padding: 0 2rem;
   padding-bottom: 1rem;
@@ -57,4 +53,21 @@
 .calendar main .cell-activated {
   background: #4287f5;
   cursor: pointer;
+}
+
+.calendarYear {
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 5px;
+  grid-template-rows: repeat(7, 1fr);
+}
+
+.calendarYear .cell {
+  width: 20px;
+  height: 20px;
+  background: #edeeed;
+}
+
+.calendarYear .cell-activated {
+  background: #4287f5;
 }
