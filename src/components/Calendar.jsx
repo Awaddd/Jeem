@@ -1,12 +1,12 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Context } from '../Store/Store';
 import { initialiseCalendarMonth } from '../Helpers/MainHelper';
 
-function Calendar () {
+function Calendar (props) {
 
   const [state, dispatch] = useContext(Context);
 
-  useEffect(() => dispatch( {type: 'SET_PROGRESS', payload: initialiseCalendarMonth() }), [])
+  useEffect(() => dispatch( {type: 'SET_PROGRESS', payload: initialiseCalendarMonth(props.month) }), [props.month])
 
   function toggleCell (week, day) {
     state.progress[week][day].active = !state.progress[week][day].active;

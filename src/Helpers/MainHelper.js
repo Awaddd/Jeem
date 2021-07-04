@@ -5,13 +5,14 @@ import dayOfYear from 'dayjs/plugin/dayOfYear';
 
 dayjs.extend(objectSupport)
 
-export const initialiseCalendarMonth = () => {
+export const initialiseCalendarMonth = (month) => {
+
+  console.log(month)
 
   //define date
   let date = new Date();
   let year = date.getFullYear();
-  let month = date.getMonth() + 1;
-  let totalDays = new Date(year, month, 0).getDate();
+  let totalDays = new Date(year, month + 1, 0).getDate();
 
   //calculate the number of weeks/rows based on the total days in the current month
   let numWeeks = Math.floor(Math.sqrt(totalDays));

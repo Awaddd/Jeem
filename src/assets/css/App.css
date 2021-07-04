@@ -29,6 +29,21 @@
   margin-top: 3rem;
 }
 
+.App-calendar-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 8fr 1fr;
+}
+
+.App-calendar-navigation {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
+.App-calendar-navigation button {
+  padding: 0.4rem 1.5rem;
+}
+
 .calendar {
   padding: 0 2rem;
   padding-bottom: 1rem;
